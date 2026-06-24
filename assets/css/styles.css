@@ -520,6 +520,9 @@ html[data-theme="light"] .intent label{background:#faf7f1}
 @media (max-width:860px){
   .nav,.header-cta .btn,.header-cta .theme-toggle{display:none}
   .burger{display:flex}
+  /* Hero-Foto: Barkeeper sitzt rechts im Bild → Ausschnitt nach rechts/oben
+     verschieben, damit das Gesicht auch hochkant sichtbar bleibt */
+  .hero__media img{object-position:68% 28%}
   .split{grid-template-columns:1fr;gap:2.5rem}
   .split--reverse .split__media{order:0}
   .split__media img{aspect-ratio:16/11}
