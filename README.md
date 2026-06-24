@@ -61,34 +61,29 @@ auf `'light'` setzen — dann startet die Seite hell.
 
 ## Deployment auf GitHub Pages
 
-Voraussetzung: ein GitHub-Konto. (`gh` CLI ist auf diesem Rechner nicht installiert —
-unten beide Wege.)
+**Live:** https://filianov.github.io/diecocktailbar-2026/
+Repository: https://github.com/filianov/diecocktailbar-2026 (public)
 
-### A) Per Web + Git (empfohlen, ohne gh)
-1. Auf github.com ein neues Repository anlegen, z. B. `diecocktailbar-2026` (public).
-2. Im Projektordner pushen:
-   ```bash
-   cd showbar-2026
-   git remote add origin https://github.com/<DEIN-USER>/diecocktailbar-2026.git
-   git push -u origin main
-   ```
-3. Auf GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-   Der mitgelieferte Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-   veröffentlicht die Seite bei jedem Push automatisch.
-4. Live-URL: `https://<DEIN-USER>.github.io/diecocktailbar-2026/`
-   (relative Pfade funktionieren auch im Unterordner).
+Veröffentlicht über **GitHub Pages – Deploy from branch** (`main`, Ordner `/`).
+`.nojekyll` sorgt dafür, dass der `assets/`-Ordner unverändert ausgeliefert wird.
 
-### B) Mit gh CLI (falls installiert)
+### Aktualisieren (neue Änderungen live bringen)
+Einfach committen und pushen — Pages baut automatisch neu (~1 Min.):
 ```bash
-brew install gh && gh auth login
-cd showbar-2026
-gh repo create diecocktailbar-2026 --public --source=. --remote=origin --push
+cd "showbar-2026"
+git add -A
+git commit -m "Update"
+git push
 ```
-Danach Pages-Source wie oben auf „GitHub Actions" stellen.
 
-### Eigene Domain (showbar.at)
-Datei `CNAME` mit Inhalt `www.showbar.at` ins Repo-Root legen und in den
-DNS-Einstellungen einen CNAME auf `<DEIN-USER>.github.io` setzen.
+### Eigene Domain (www.showbar.at)
+1. Datei `CNAME` mit Inhalt `www.showbar.at` ins Repo-Root legen und pushen.
+2. Beim Domain-Anbieter einen CNAME-Eintrag `www` → `filianov.github.io` setzen.
+3. Auf GitHub: **Settings → Pages → Custom domain** eintragen, „Enforce HTTPS" aktivieren.
+
+> Hinweis: Der GitHub-Token aus dem Browser-Login hat keinen `workflow`-Scope,
+> daher wird Pages aktuell branch-basiert (statt via Actions-Workflow) gebaut —
+> für diese reine Static-Site ist das die einfachste und stabilste Variante.
 
 ## Assets
 Alle Originalbilder/Logos wurden aus dem Wix-CDN gesichert und unter
